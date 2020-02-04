@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { firestoreConnect } from 'react-redux-firebase';
+import React, { useState } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import { firestoreConnect } from "react-redux-firebase";
 
-import Heading from '../../components/UI/Headings/Heading';
-import { Container } from '../../hoc/layout/elements';
-import InputTodo from './InputTodo/InputTodo';
-import Button from '../../components/UI/Forms/Button/Button';
-import Loader from '../../components/UI/Loader/Loader';
-import Todo from './Todo/Todo';
+import Heading from "../../components/UI/Headings/Heading";
+import { Container } from "../../hoc/layout/elements";
+import InputTodo from "./InputTodo/InputTodo";
+import Button from "../../components/UI/Forms/Button/Button";
+import Loader from "../../components/UI/Loader/Loader";
+import Todo from "./Todo/Todo";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -67,7 +67,7 @@ const Todos = ({ todos, requested, userId }) => {
           .slice(0)
           .reverse()
           .map(todo => (
-            <Todo key={todo.id} todo={todo} />
+            <Todo key={todo.id} todo={todo}  />
           ))}
       </Content>
     );
@@ -78,7 +78,7 @@ const Todos = ({ todos, requested, userId }) => {
       <Container>
         <InnerWrapper>
           <Heading noMargin size="h1" color="white">
-           Your Queries
+            Your Queries
           </Heading>
           <Heading bold size="h4" color="white">
             All you have to do for now...
@@ -98,15 +98,12 @@ const mapStateToProps = ({ firebase, firestore }) => ({
   userId: firebase.auth.uid,
   todos: firestore.data.todos,
   requesting: firestore.status.requesting,
-  requested: firestore.status.requested,
+  requested: firestore.status.requested
 });
 
 const mapDispatchToProps = {};
 
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect(props => [`todos/${props.userId}`])
 )(Todos);

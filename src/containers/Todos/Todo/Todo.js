@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
-import DeleteTodo from './DeleteTodo/DeleteTodo';
-import InputTodo from '../InputTodo/InputTodo';
+import DeleteTodo from "./DeleteTodo/DeleteTodo";
+import InputTodo from "../InputTodo/InputTodo";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -29,15 +29,15 @@ const Controls = styled.div`
 `;
 
 const editStyles = {
-  color: 'var(--color-main)',
-  margin: '0 .5rem',
-  cursor: 'pointer',
+  color: "var(--color-main)",
+  margin: "0 .5rem",
+  cursor: "pointer"
 };
 
 const deleteStyles = {
-  color: 'var(--color-errorRed)',
-  margin: '0 .5rem',
-  cursor: 'pointer',
+  color: "var(--color-errorRed)",
+  margin: "0 .5rem",
+  cursor: "pointer"
 };
 
 const Todo = ({ todo }) => {
@@ -46,7 +46,15 @@ const Todo = ({ todo }) => {
 
   return (
     <Wrapper>
-      {todo.todo}
+      <div>
+        <header>{todo.todo}</header>
+        <div>
+          <ul>Length: {todo.length}</ul>
+          <ul>Width: {todo.width}</ul>
+          <ul>Thickness: {todo.thickness}</ul>
+        </div>
+      </div>
+
       <Controls>
         <i
           className="fas fa-edit"
