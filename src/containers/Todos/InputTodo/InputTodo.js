@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Formik, Field } from 'formik';
-import * as Yup from 'yup';
-import styled from 'styled-components';
+import React from "react";
+import { connect } from "react-redux";
+import { Formik, Field } from "formik";
+import * as Yup from "yup";
+import styled from "styled-components";
 
-import Button from '../../../components/UI/Forms/Button/Button';
-import Heading from '../../../components/UI/Headings/Heading';
-import Modal from '../../../components/UI/Modal/Modal';
-import Input from '../../../components/UI/Forms/Input/Input';
-import Message from '../../../components/UI/Message/Message';
-import { StyledForm } from '../../../hoc/layout/elements';
+import Button from "../../../components/UI/Forms/Button/Button";
+import Heading from "../../../components/UI/Headings/Heading";
+import Modal from "../../../components/UI/Modal/Modal";
+import Input from "../../../components/UI/Forms/Input/Input";
+import Message from "../../../components/UI/Message/Message";
+import { StyledForm } from "../../../hoc/layout/elements";
 
-import * as actions from '../../../store/actions';
+import * as actions from "../../../store/actions";
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -29,8 +29,8 @@ const MessageWrapper = styled.div`
 
 const TodoSchema = Yup.object().shape({
   todo: Yup.string()
-    .required('The todo is required.')
-    .min(4, 'Too short.'),
+    .required("The todo is required.")
+    .min(4, "Too short.")
 });
 
 const InputTodo = ({
@@ -40,24 +40,25 @@ const InputTodo = ({
   addTodo,
   loading,
   error,
-  editTodoAction,
+  editTodoAction
 }) => {
-  const loadingText = editTodo ? 'Editing...' : 'Adding...';
+  const loadingText = editTodo ? "Editing..." : "Adding...";
 
   return (
     <>
       <Modal opened={opened} close={close}>
         <Heading noMargin size="h1" color="white">
-          {editTodo ? 'Edit your todo' : 'Add your new todo'}
+          {editTodo ? "Edit your todo" : "Add your new todo"}
         </Heading>
         <Heading bold size="h4" color="white">
           {editTodo
-            ? 'Edit your todo and tap edit'
-            : 'Type your todo and press add'}
+            ? "Edit your todo and tap edit"
+            : "Type your todo and press add"}
         </Heading>
         <Formik
           initialValues={{
-            todo: editTodo ? editTodo.todo : '',
+            todo: editTodo ? editTodo.todo : "",
+            test: ""
           }}
           validationSchema={TodoSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -65,6 +66,7 @@ const InputTodo = ({
             const res = editTodo
               ? await editTodoAction(editTodo.id, values)
               : await addTodo(values);
+            console.log(values)
             if (res) {
               close();
             }
@@ -80,6 +82,12 @@ const InputTodo = ({
                 placeholder="Write your todo..."
                 component={Input}
               />
+              <Field
+                type="text"
+                name="test"
+                placeholder="Write your todo..."
+                component={Input}
+              />
               <ButtonsWrapper>
                 <Button
                   contain
@@ -88,7 +96,7 @@ const InputTodo = ({
                   disabled={!isValid || isSubmitting}
                   loading={loading ? loadingText : null}
                 >
-                  {editTodo ? 'Edit todo' : 'Add todo'}
+                  {editTodo ? "Edit todo" : "Add todo"}
                 </Button>
                 <Button
                   type="button"
@@ -117,15 +125,12 @@ const InputTodo = ({
 
 const mapStateToProps = ({ todos }) => ({
   loading: todos.loading,
-  error: todos.error,
+  error: todos.error
 });
 
 const mapDispatchToProps = {
   addTodo: actions.addTodo,
-  editTodoAction: actions.editTodo,
+  editTodoAction: actions.editTodo
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(InputTodo);
+export default connect(mapStateToProps, mapDispatchToProps)(InputTodo);

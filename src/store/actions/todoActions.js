@@ -13,6 +13,7 @@ export const addTodo = data => async (dispatch, getState, { getFirestore }) => {
     const newTodo = {
       id: new Date().valueOf(),
       todo: data.todo,
+      test: data.test,
     };
     if (!res.data()) {
       console.log('got here');
