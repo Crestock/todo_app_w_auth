@@ -78,13 +78,13 @@ const Todos = ({ todos, requested, userId }) => {
       <Container>
         <InnerWrapper>
           <Heading noMargin size="h1" color="white">
-            Your Todos
+           Your Queries
           </Heading>
           <Heading bold size="h4" color="white">
             All you have to do for now...
           </Heading>
           <Button color="main" contain onClick={() => setIsAdding(true)}>
-            Add Todo
+            Add Query
           </Button>
           <InputTodo opened={isAdding} close={() => setIsAdding(false)} />
           {content}

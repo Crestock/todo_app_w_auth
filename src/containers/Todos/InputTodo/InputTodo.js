@@ -48,17 +48,19 @@ const InputTodo = ({
     <>
       <Modal opened={opened} close={close}>
         <Heading noMargin size="h1" color="white">
-          {editTodo ? "Edit your todo" : "Add your new todo"}
+          {editTodo ? "Edit your quote" : "Add a new quote"}
         </Heading>
         <Heading bold size="h4" color="white">
           {editTodo
-            ? "Edit your todo and tap edit"
-            : "Type your todo and press add"}
+            ? "Edit your quote and tap edit"
+            : "Type your quote and press add"}
         </Heading>
         <Formik
           initialValues={{
             todo: editTodo ? editTodo.todo : "",
-            test: ""
+            length: "",
+            width: "",
+            thickness: ""
           }}
           validationSchema={TodoSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -66,7 +68,7 @@ const InputTodo = ({
             const res = editTodo
               ? await editTodoAction(editTodo.id, values)
               : await addTodo(values);
-            console.log(values)
+            console.log(values);
             if (res) {
               close();
             }
@@ -84,8 +86,20 @@ const InputTodo = ({
               />
               <Field
                 type="text"
-                name="test"
-                placeholder="Write your todo..."
+                name="length"
+                placeholder="length"
+                component={Input}
+              />
+              <Field
+                type="text"
+                name="width"
+                placeholder="width"
+                component={Input}
+              />
+              <Field
+                type="text"
+                name="thickness"
+                placeholder="thickness"
                 component={Input}
               />
               <ButtonsWrapper>
@@ -96,7 +110,7 @@ const InputTodo = ({
                   disabled={!isValid || isSubmitting}
                   loading={loading ? loadingText : null}
                 >
-                  {editTodo ? "Edit todo" : "Add todo"}
+                  {editTodo ? "Edit Query" : "Add Query"}
                 </Button>
                 <Button
                   type="button"

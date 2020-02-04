@@ -1,4 +1,4 @@
-import * as actions from './actionTypes';
+import * as actions from "./actionTypes";
 
 // Add a todo
 export const addTodo = data => async (dispatch, getState, { getFirestore }) => {
@@ -7,28 +7,30 @@ export const addTodo = data => async (dispatch, getState, { getFirestore }) => {
   dispatch({ type: actions.ADD_TODO_START });
   try {
     const res = await firestore
-      .collection('todos')
+      .collection("todos")
       .doc(userId)
       .get();
     const newTodo = {
       id: new Date().valueOf(),
       todo: data.todo,
-      test: data.test,
+      length: data.length,
+      width: data.width,
+      thickness: data.thickness
     };
     if (!res.data()) {
-      console.log('got here');
+      console.log("got here");
       firestore
-        .collection('todos')
+        .collection("todos")
         .doc(userId)
         .set({
-          todos: [newTodo],
+          todos: [newTodo]
         });
     } else {
       firestore
-        .collection('todos')
+        .collection("todos")
         .doc(userId)
         .update({
-          todos: [...res.data().todos, newTodo],
+          todos: [...res.data().todos, newTodo]
         });
     }
     dispatch({ type: actions.ADD_TODO_SUCCESS });
@@ -49,16 +51,16 @@ export const deleteTodo = id => async (
   dispatch({ type: actions.DELETE_TODO_START });
   try {
     const res = await firestore
-      .collection('todos')
+      .collection("todos")
       .doc(userId)
       .get();
     const previousTodos = res.data().todos;
     const newTodos = previousTodos.filter(todo => todo.id !== id);
     await firestore
-      .collection('todos')
+      .collection("todos")
       .doc(userId)
       .update({
-        todos: newTodos,
+        todos: newTodos
       });
     dispatch({ type: actions.DELETE_TODO_SUCCESS });
   } catch (err) {
@@ -77,7 +79,7 @@ export const editTodo = (id, data) => async (
   dispatch({ type: actions.ADD_TODO_START });
   try {
     const res = await firestore
-      .collection('todos')
+      .collection("todos")
       .doc(userId)
       .get();
     const todos = res.data().todos;
@@ -85,10 +87,10 @@ export const editTodo = (id, data) => async (
     todos[index].todo = data.todo;
 
     await firestore
-      .collection('todos')
+      .collection("todos")
       .doc(userId)
       .update({
-        todos,
+        todos
       });
     dispatch({ type: actions.ADD_TODO_SUCCESS });
     return true;
