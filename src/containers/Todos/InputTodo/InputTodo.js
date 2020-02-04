@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
+import Select from "react-select";
 
 import Button from "../../../components/UI/Forms/Button/Button";
 import Heading from "../../../components/UI/Headings/Heading";
@@ -78,10 +79,16 @@ const InputTodo = ({
         >
           {({ isSubmitting, isValid, resetForm }) => (
             <StyledForm>
+              <div>
+                <Field name="units" component="select" placeholder="m">
+                  <option value="m">Metres - m</option>
+                  <option value="mm">Millimetres - mm</option>
+                </Field>
+              </div>
               <Field
                 type="text"
                 name="todo"
-                placeholder="Write your todo..."
+                placeholder="Enter what you're looking for: i.e metal plate"
                 component={Input}
               />
               <Field
@@ -102,6 +109,7 @@ const InputTodo = ({
                 placeholder="thickness"
                 component={Input}
               />
+
               <ButtonsWrapper>
                 <Button
                   contain

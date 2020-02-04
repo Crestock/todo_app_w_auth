@@ -12,6 +12,7 @@
     "react-redux-firebase": "^2.2.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
+    "react-select": "^3.0.8",
     "redux": "^4.0.1",
     "redux-firestore": "^0.7.3",
     "redux-thunk": "^2.3.0",
