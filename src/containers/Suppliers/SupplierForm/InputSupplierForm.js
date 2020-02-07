@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Formik, Field, withFormik } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
-import Select from "react-select";
 import Button from "../../../components/UI/Forms/Button/Button";
 import Heading from "../../../components/UI/Headings/Heading";
 import Modal from "../../../components/UI/Modal/Modal";
@@ -80,7 +79,7 @@ const InputTodo = ({
           {({ isSubmitting, isValid, resetForm }) => (
             <StyledForm>
               <div>
-                <Field name="units" component='select'placeholder="m">
+                <Field name="units" component="select" placeholder="m">
                   <option value="m">Metres - m</option>
                   <option value="mm">Millimetres - mm</option>
                 </Field>

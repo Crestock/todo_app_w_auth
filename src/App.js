@@ -9,7 +9,10 @@ import Profile from './containers/Auth/Profile/Profile';
 import VerifyEmail from './containers/Auth/VerifyEmail/VerifyEmail';
 import RecoverPassword from './containers/Auth/RecoverPassword/RecoverPassword';
 import Logout from './containers/Auth/Logout/Logout';
-import Search from './containers/QueryRedirect/QueryRedirect'
+import Search from './containers/QueryRedirect/QueryRedirect';
+import Suppliers from './containers/Suppliers/Suppliers';
+//import SupplierForm from './components/UI/Forms/SupplierForm/SupplierForm';
+//  <Route exact path='/supplier/create/product' component={SupplierForm}/>
 const Todos = React.lazy(() => import('./containers/Todos/Todos'));
 
 const App = ({ loggedIn, emailVerified }) => {
@@ -31,7 +34,9 @@ const App = ({ loggedIn, emailVerified }) => {
           <Route exact path="/" component={Todos} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/logout" component={Logout} />
-          <Route exact path='/search' component={Search}/>
+          <Route exact path="/suppliers" component={Suppliers} />
+          <Route exact path='/search' component={Search} />
+        
           <Redirect to="/" />
         </Switch>
       </Suspense>
